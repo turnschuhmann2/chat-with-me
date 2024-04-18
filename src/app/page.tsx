@@ -1,71 +1,91 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import useTextTyper, { typingSpeeds } from "./_hooks/useTextTyper";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { ChatBubbleProps } from "./_components/chat-bubble";
+
+const chatBubbles: ChatBubbleProps[] = [
+  {
+    position: 1,
+    content: "Hello!",
+    orientation: "left",
+  },
+  {
+    position: 2,
+    content:
+      "Hi there! My name is Dennis and welcome to my interactive portfolio. Ask me anything!",
+    orientation: "right",
+  },
+];
 
 const text =
   "Hi there! My name is Dennis and welcome to my interactive portfolio. Ask me anything!";
 
 export default function HomePage() {
-  const [enableTyping, setEnableTyping] = useState(false);
-  const [currentText, setCurrentText] = useState("");
+  const { currentText, startTyping } = useTextTyper(text, typingSpeeds.medium);
 
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
+  const [searchValue, setSearchValue] = useState("");
 
-    if (enableTyping && currentText.length < text.length) {
-      timeout = setTimeout(() => {
-        setCurrentText(prevText => prevText + text[currentText.length]);
-      }, 50);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [enableTyping, currentText]);
-
-  const handleButtonClick = () => {
-    setEnableTyping(true);
+  const handleSearchValueChange: React.ChangeEventHandler<
+    HTMLInputElement
+  > = event => {
+    setSearchValue(event.target.value);
   };
 
+  const [chatBubbles, setChatBubbles] = useState([]);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <div className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white ">
-          <p className="text-lg">{currentText}</p>
+    <main className="flex h-screen min-h-screen flex-row items-center justify-center bg-gradient-to-br from-[#A2FFE4] to-[#34FFAE] text-white">
+      <div className="container flex h-full flex-row items-center justify-between gap-8 px-8 py-12 ">
+        <div className="h-full w-1/4 rounded-3xl bg-white bg-opacity-80"></div>
+
+        <div className="flex size-full flex-col">
+          <div className="flex h-full w-full flex-col justify-start gap-3 pt-4">
+            {/* {chatBubbles.map(bubble => 
+              <div
+            } */}
+
+            <div className="flex w-full flex-row justify-start gap-2">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+
+              <div className="rounded-xl rounded-tl-none bg-white p-4 text-black">
+                Hello!
+              </div>
+            </div>
+
+            <div className="flex w-full flex-row justify-end gap-2">
+              <div className="rounded-xl rounded-tr-none bg-white p-4 text-black">
+                {text}
+              </div>
+
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col justify-between gap-3 rounded-3xl bg-white px-5 pb-6 pt-3 text-black">
+            <input
+              className="w-1/2 rounded-xl bg-gray-300 p-3 focus-visible:outline-none"
+              type="text"
+              placeholder="Search for prompts..."
+              value={searchValue}
+              onChange={handleSearchValueChange}
+            />
+
+            <div className="flex flex-row flex-wrap gap-3">
+              <div className="h-16 rounded-xl px-3 py-2 shadow-lg hover:bg-slate-200">
+                Say Hi!
+              </div>
+            </div>
+          </div>
         </div>
-
-        <button
-          className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-          onClick={handleButtonClick}
-        >
-          Chat with me
-        </button>
-
-        {/* <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">          
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
-        </div> */}
       </div>
     </main>
   );
