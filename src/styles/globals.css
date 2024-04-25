@@ -75,13 +75,10 @@
   }
 }
 
-.typing-bubble {
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  margin: 0;
-  gap: 6px;
-  padding: 6px;
-  /* background: rgba(255, 255, 255, 0.2); */
-  /* border-radius: 50px; */
+.gradient-background {
+  @apply bg-gradient-to-br from-[#ADFFE7] to-[#01C567];
+}
+
+.scroll-area-height > div {
+  height: 100%;
 }

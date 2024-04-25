@@ -11,12 +11,10 @@ export default function PromptCard(props: { prompt: Prompt }) {
 
   return (
     <div
-      className="flex flex-row flex-wrap gap-3"
       onClick={handlePromptCardClick}
+      className="bg-default hover:bg-defaultHover text-defaultContent h-16 rounded-xl px-3 py-2 shadow-xl"
     >
-      <div className="h-16 rounded-xl px-3 py-2 shadow-lg hover:bg-slate-200">
-        {props.prompt.content}
-      </div>
+      {props.prompt.content}
     </div>
   );
 }

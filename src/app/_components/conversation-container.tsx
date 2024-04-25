@@ -40,7 +40,7 @@ export default function ConversationContainer() {
             layout
             key={bubble.id}
             className={clsx(
-              "flex w-full justify-start gap-2",
+              " flex w-full justify-start gap-2",
               bubble.type === "response" ? "flex-row " : "flex-row-reverse ",
             )}
             variants={container}
@@ -55,10 +55,10 @@ export default function ConversationContainer() {
 
             <div
               className={clsx(
-                " rounded-xl bg-white text-black",
+                " rounded-xl",
                 bubble.type === "response"
-                  ? "rounded-tl-none"
-                  : "rounded-tr-none",
+                  ? "text-secondaryContent rounded-tl-none bg-secondary"
+                  : "text-primaryContent rounded-tr-none bg-primary",
                 bubble.loading ? "p-3" : "p-4",
               )}
             >

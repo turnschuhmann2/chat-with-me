@@ -7,20 +7,23 @@ export default function HomePage(props: {
   searchParams?: { query?: string; page?: string };
 }) {
   return (
-    <main className="flex h-screen min-h-screen flex-row items-center justify-center bg-gradient-to-br from-[#A2FFE4] to-[#34FFAE] text-white">
+    <main className="gradient-background flex h-screen min-h-screen flex-row items-center justify-center">
       <div className="container flex h-full flex-row items-center justify-between gap-8 px-8 py-12 ">
-        <div className="h-full w-1/4 rounded-3xl bg-white bg-opacity-80"></div>
+        {/* <div className="h-full w-1/4 rounded-3xl bg-white bg-opacity-80"></div> */}
 
-        <div className="flex size-full flex-col gap-6">
+        <div className="bg-darkTransparent50 flex size-full flex-col gap-6 rounded-3xl p-6 pb-8">
           <ConversationProvider>
             <ScrollArea>
               <ConversationContainer />
             </ScrollArea>
 
+            <div className="bg-lightTransparent50 h-[1px]" />
+
             <PromptInputBar searchParams={props.searchParams} />
           </ConversationProvider>
         </div>
       </div>
+      y
     </main>
   );
 }

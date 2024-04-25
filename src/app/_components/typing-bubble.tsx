@@ -40,7 +40,7 @@ export default function TypingBubble() {
       {[0, 1, 2].map(index => (
         <motion.div
           key={index}
-          className="size-4 rounded-full bg-gray-500"
+          className="size-4 rounded-full bg-white"
           variants={item}
         />
       ))}
