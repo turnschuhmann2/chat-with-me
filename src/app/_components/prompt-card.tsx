@@ -1,30 +1,13 @@
 "use client";
 
-import type { Bubble } from "../_providers/ConversationProvider";
-import type { Prompt } from "~/server/db/schema";
+import type { Prompt } from "server/db/schema";
 
 import { useConversationContext } from "../_providers/ConversationProvider";
 
 export default function PromptCard(props: { prompt: Prompt }) {
-  const { chatBubbles, addBubbles } = useConversationContext() ?? {};
+  const { postPrompt } = useConversationContext();
 
-  const handlePromptCardClick = () => {
-    const position = chatBubbles?.length ?? 0;
-
-    const promptBubble: Bubble = {
-      position,
-      content: props.prompt.content,
-      orientation: "left",
-    };
-
-    const responseBubble: Bubble = {
-      position: position + 1,
-      content: props.prompt.responses?.[0]?.content ?? "No response found.",
-      orientation: "right",
-    };
-
-    addBubbles!([promptBubble, responseBubble]);
-  };
+  const handlePromptCardClick = () => postPrompt(props.prompt);
 
   return (
     <div
