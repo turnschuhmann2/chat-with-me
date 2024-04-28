@@ -23,7 +23,7 @@ export default async function PromptInputBar(props: {
     <div className="flex w-full flex-col justify-between gap-4 rounded-3xl">
       <SearchBar />
 
-      <div className="flex flex-row flex-wrap gap-4">
+      <div className="flex flex-row flex-wrap gap-2 md:gap-4">
         {prompts?.length ? (
           prompts.map(prompt => <PromptCard key={prompt.id} prompt={prompt} />)
         ) : (

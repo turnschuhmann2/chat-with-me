@@ -1,10 +1,20 @@
-### TODO
+# Radme
+
+## TODO
+
+### High Priority
 
 - [ ] Block new prompts until response was posted
-- [ ] Add image avatars using file host
-- [ ] Add responses with images
-- [ ] Add option to change your avatar
-- [x] Add Scroll Container to chat
 - [ ] Add more prompts & responses
-- [ ] Add page where user can create his own chat bots and change prompts and responses (user auth necessary)
-- [x] Implement redesign
+- [ ] Add a system to prompts and responses that links next prompts to previous responses, so next prompts can be loaded after a response.
+- [ ] Add image avatars using file host
+- [ ] Add option to select your guest avatar
+- [ ] Add responses with images
+- [ ] Implement responsive UI for mobile
+
+### Backlog
+
+- [ ] Build the homepage
+- [ ] Build the chatbot page
+- [ ] Implement change avatar
+- [ ] add user auth
