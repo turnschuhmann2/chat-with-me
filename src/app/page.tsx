@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ScrollArea } from "../components/ui/scroll-area";
-import ConversationContainer from "./_components/conversation-container";
-import PromptInputBar from "./_components/prompt-input-bar";
-import ConversationProvider from "./_providers/ConversationProvider";
+import ConversationContainer from "../components/conversation-container";
+import PromptInputBar from "../components/prompt-input-bar";
+import ConversationProvider from "../providers/conversation-provider";
 
 export default function HomePage(props: {
   searchParams?: { query?: string; page?: string };

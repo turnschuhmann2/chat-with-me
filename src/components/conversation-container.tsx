@@ -1,10 +1,10 @@
 "use client";
 
-import type { BubbleInterface } from "../_providers/ConversationProvider";
+import type { BubbleInterface } from "../providers/conversation-provider";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { useConversationContext } from "../_providers/ConversationProvider";
+import { useConversationContext } from "../providers/conversation-provider";
 import { AnimatePresence, motion } from "framer-motion";
 import { clsx } from "clsx";
 import TypingBubble from "./typing-bubble";

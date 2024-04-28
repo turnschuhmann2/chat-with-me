@@ -2,7 +2,7 @@
 
 import type { Prompt } from "~/server/db/schema";
 
-import { useConversationContext } from "../_providers/ConversationProvider";
+import { useConversationContext } from "../providers/conversation-provider";
 
 export default function PromptCard(props: { prompt: Prompt }) {
   const { postPrompt } = useConversationContext();
