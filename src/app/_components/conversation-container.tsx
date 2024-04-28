@@ -32,7 +32,7 @@ export default function ConversationContainer() {
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="flex h-full w-full flex-col justify-end gap-3 overflow-y-hidden pr-4 pt-5"
+      className="flex h-full w-full flex-col justify-end gap-3 overflow-y-hidden"
     >
       <AnimatePresence initial={false}>
         {chatBubbles.map((bubble: BubbleInterface) => (
@@ -48,7 +48,7 @@ export default function ConversationContainer() {
             animate="visible"
             exit="hidden"
           >
-            <Avatar>
+            <Avatar className="size-8 md:size-10">
               <AvatarImage src="https://github.com/shadcn.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -57,8 +57,8 @@ export default function ConversationContainer() {
               className={clsx(
                 " rounded-xl",
                 bubble.type === "response"
-                  ? "text-secondaryContent rounded-tl-none bg-secondary"
-                  : "text-primaryContent rounded-tr-none bg-primary",
+                  ? "rounded-tl-none bg-secondary text-secondaryContent"
+                  : "rounded-tr-none bg-primary text-primaryContent",
                 bubble.loading ? "p-3" : "p-4",
               )}
             >

@@ -11,7 +11,7 @@ export default function HomePage(props: {
       <div className="container flex h-full flex-row items-center justify-between gap-8 px-2 py-2 md:px-8 md:py-12 ">
         {/* <div className="h-full w-1/4 rounded-3xl bg-white bg-opacity-80"></div> */}
 
-        <div className="flex size-full flex-col gap-6 rounded-3xl bg-darkTransparent50 p-2 pb-5 md:p-6 md:pb-8">
+        <div className="flex size-full flex-col gap-3 rounded-3xl bg-darkTransparent50 p-2 pb-5 md:gap-6 md:p-6 md:pb-8">
           <ConversationProvider>
             <ScrollArea>
               <ConversationContainer />

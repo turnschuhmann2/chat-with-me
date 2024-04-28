@@ -72,6 +72,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    @apply text-sm md:text-base;
   }
 }
 

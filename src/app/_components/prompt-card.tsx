@@ -12,7 +12,7 @@ export default function PromptCard(props: { prompt: Prompt }) {
   return (
     <div
       onClick={handlePromptCardClick}
-      className="bg-default hover:bg-defaultHover text-defaultContent h-16 rounded-xl px-3 py-2 shadow-xl"
+      className="rounded-xl bg-default px-3 py-2 text-defaultContent shadow-xl hover:bg-defaultHover md:h-16"
     >
       {props.prompt.content}
     </div>
