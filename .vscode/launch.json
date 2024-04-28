@@ -21,14 +21,12 @@
       "type": "node-terminal",
       "request": "launch",
       "command": "pnpm run dev",
-      "console": "integratedTerminal",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
         "action": "debugWithChrome"
       }
     },
-
     {
       "name": "Launch Chrome in Debug Mode",
       "request": "launch",
