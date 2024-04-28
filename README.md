@@ -8,12 +8,27 @@ Searching for a creative and unique idea for my portfolio, I came up with this. 
 2. Create a `.env` file and paste in required environment variables (see [.env.example](.env.example))
 3. Start the application using `pnpm run dev` or `pnpm run dev --turbo` if you want to use [Turbopack](https://turbo.build/pack). Note that this wont work with debugging in vscode.
 
+## Useful commands
+
+- use `pnpm db:push` to push changes to the database schema
+- use `pnpm db:studio` to open Drizzle Studio
+
+## Features
+
+- [Next.js](https://nextjs.org/) with new App Router
+- React Server Components (RSCs) and Server Actions
+- [Framer Motion](https://www.framer.com/motion/) for animation of the chat page
+- [Drizzle ORM](https://orm.drizzle.team/) (with Postgres) for storing data
+- [shadcn/ui](https://ui.shadcn.com/) with [TailwindCSS](https://tailwindcss.com/)
+
 ## TODO
 
 ### High Priority
 
 - [x] make app usable for mobile
 - [x] add basic page for editing prompts
+- [x] restructure \_components, \_hooks and \_providers folders
+- [ ] improve implementation for icons (have a look at phosphoricons)
 - [ ] Add more prompts & responses
 - [ ] Add responses with images
 - [ ] Add image avatars using file host
