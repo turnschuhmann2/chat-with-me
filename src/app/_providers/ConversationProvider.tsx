@@ -1,6 +1,6 @@
 "use client";
 
-import type { Prompt } from "server/db/schema";
+import type { Prompt } from "~/server/db/schema";
 
 import { createContext, useContext, useState } from "react";
 
@@ -51,7 +51,7 @@ export default function ConversationProvider({ children }) {
 
     setChatBubbles(prev => [...prev, loadingBubble]);
 
-    const randomDelay = getRandomInt(1000, 4000);
+    const randomDelay = getRandomInt(1000, 2000);
 
     await timeout(randomDelay);
 

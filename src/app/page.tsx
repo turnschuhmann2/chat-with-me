@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ScrollArea } from "../components/ui/scroll-area";
 import ConversationContainer from "./_components/conversation-container";
 import PromptInputBar from "./_components/prompt-input-bar";

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Prompt } from "server/db/schema";
+import type { Prompt } from "~/server/db/schema";
 
 import { useConversationContext } from "../_providers/ConversationProvider";
 

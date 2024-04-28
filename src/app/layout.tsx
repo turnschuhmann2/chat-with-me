@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Inter } from "next/font/google";
 
 import "~/styles/globals.css";
+import "~/styles/icons.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,8 +17,10 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -29,6 +32,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          {modal}
+          <div id="modal-root" />
         </ThemeProvider>
       </body>
     </html>

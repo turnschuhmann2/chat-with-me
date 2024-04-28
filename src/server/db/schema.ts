@@ -18,6 +18,15 @@ import {
  */
 export const createTable = pgTableCreator(name => `chat-with-me_${name}`);
 
+// export const topics = createTable("topics", {
+//   id: serial("id").primaryKey(),
+//   name: text("name").notNull(),
+//   createdAt: timestamp("created_at")
+//     .default(sql`CURRENT_TIMESTAMP`)
+//     .notNull(),
+//   updatedAt: timestamp("updatedAt"),
+// });
+
 export const prompts = createTable("prompts", {
   id: serial("id").primaryKey(),
   content: text("content").notNull(),
@@ -35,6 +44,8 @@ export const promptRelations = relations(prompts, ({ many }) => ({
 export type Prompt = typeof prompts.$inferSelect & {
   responses: Response[];
 };
+
+// export type PromptInput = typeof prompts.$inferInsert;
 
 export const responses = createTable("responses", {
   id: serial("id").primaryKey(),

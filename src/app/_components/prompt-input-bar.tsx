@@ -1,4 +1,4 @@
-import { db } from "server/db";
+import { db } from "~/server/db";
 
 import SearchBar from "./search-bar";
 import PromptCard from "./prompt-card";
