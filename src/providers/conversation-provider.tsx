@@ -37,7 +37,7 @@ export default function ConversationProvider({ children }) {
       type: "prompt",
     };
 
-    setChatBubbles(prev => [...prev, promptBubble]);
+    setChatBubbles(prev => [promptBubble, ...prev]);
 
     await timeout(500);
 
@@ -49,7 +49,7 @@ export default function ConversationProvider({ children }) {
       type: "response",
     };
 
-    setChatBubbles(prev => [...prev, loadingBubble]);
+    setChatBubbles(prev => [loadingBubble, ...prev]);
 
     const responseLength = prompt.responses[0]?.content?.length;
 
@@ -73,7 +73,7 @@ export default function ConversationProvider({ children }) {
       type: "response",
     };
 
-    setChatBubbles(prev => [...prev, responseBubble]);
+    setChatBubbles(prev => [responseBubble, ...prev]);
   };
 
   return (

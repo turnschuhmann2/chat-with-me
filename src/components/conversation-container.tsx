@@ -32,7 +32,7 @@ export default function ConversationContainer() {
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="flex h-full w-full flex-col justify-end gap-3 overflow-y-hidden"
+      className="scroll-gutter flex h-full w-full flex-col-reverse gap-3 overflow-y-auto p-2"
     >
       <AnimatePresence initial={false}>
         {chatBubbles.map((bubble: BubbleInterface) => (

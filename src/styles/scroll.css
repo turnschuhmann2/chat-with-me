@@ -1,0 +1,25 @@
+:root {
+  --scrollbar-width: 8px;
+}
+
+.scroll-gutter {
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: theme(colors.neutral);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* background: #555; */
+}

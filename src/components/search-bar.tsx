@@ -25,7 +25,7 @@ export default function SearchBar() {
 
   return (
     <input
-      className="w-full rounded-xl bg-neutral p-3 text-neutralContent focus-visible:outline-none md:w-1/2"
+      className="mx-2 w-full rounded-xl bg-neutral p-3 text-neutralContent focus-visible:outline-none md:w-1/2"
       type="text"
       placeholder="Search for prompts..."
       onChange={handleSearchTermChange}
