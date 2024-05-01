@@ -4,7 +4,7 @@ import type { Prompt } from "~/server/db/schema";
 
 import { createContext, useContext, useState } from "react";
 
-import { generateId, getRandomInt, timeout } from "~/util/common";
+import { generateId, timeout } from "~/util/common";
 
 export interface BubbleInterface {
   id: string;
@@ -51,9 +51,15 @@ export default function ConversationProvider({ children }) {
 
     setChatBubbles(prev => [...prev, loadingBubble]);
 
-    const randomDelay = getRandomInt(1000, 2000);
+    const responseLength = prompt.responses[0]?.content?.length;
 
-    await timeout(randomDelay);
+    if (!responseLength) {
+      return;
+    }
+
+    const delay = 1000 + responseLength * 2;
+
+    await timeout(delay);
 
     setChatBubbles(prev =>
       prev.filter(bubble => bubble.id !== loadingBubbleId),

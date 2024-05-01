@@ -55,7 +55,8 @@ export default function ConversationContainer() {
 
             <div
               className={clsx(
-                " rounded-xl",
+                "max-w-[75%] xl:max-w-[60%]",
+                "rounded-xl",
                 bubble.type === "response"
                   ? "rounded-tl-none bg-secondary text-secondaryContent"
                   : "rounded-tr-none bg-primary text-primaryContent",
