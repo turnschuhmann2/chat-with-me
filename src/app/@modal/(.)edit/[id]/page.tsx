@@ -1,8 +1,3 @@
-import { eq } from "drizzle-orm";
-
-import { db } from "@/server/db";
-import { responses } from "@/server/db/schema";
-
 import { revalidatePath } from "next/cache";
 import { Modal } from "./modal";
 
@@ -10,6 +5,7 @@ import { FloppyDisk, Plus, Trash } from "@phosphor-icons/react/dist/ssr";
 
 import {
   createResponse,
+  deleteResponse,
   updatePromptContent,
   updateResponseContent,
 } from "@/server/db/mutations";
@@ -78,7 +74,7 @@ export default async function PromptModal({
               formAction={async () => {
                 "use server";
 
-                await db.delete(responses).where(eq(responses.id, response.id));
+                await deleteResponse(response.id);
 
                 revalidatePath(`/edit`);
               }}

@@ -25,6 +25,10 @@ export async function createResponse(promptId: number, content = "") {
   return newResponseId;
 }
 
+export async function deleteResponse(responseId: number) {
+  await db.delete(responses).where(eq(responses.id, responseId));
+}
+
 export async function createPrompt(content = "") {
   const newPromptId = await db
     .insert(prompts)

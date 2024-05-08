@@ -1,23 +1,14 @@
-import { db } from "~/server/db";
-
-import SearchBar from "./search-bar";
 import PromptCard from "./prompt-card";
+import SearchBar from "./search-bar";
+
+import { searchPrompts } from "@/server/db/queries";
 
 export const dynamic = "force-dynamic";
 
 export default async function PromptInputBar(props: {
   searchParams?: { query?: string; page?: string };
 }) {
-  const prompts = await db.query.prompts.findMany({
-    where: (prompts, { like }) =>
-      props.searchParams?.query
-        ? like(prompts.content, `%${props.searchParams.query}%`)
-        : undefined,
-    orderBy: (prompts, { asc }) => [asc(prompts.relevance)],
-    with: {
-      responses: true,
-    },
-  });
+  const prompts = await searchPrompts(props.searchParams?.query);
 
   return (
     <div className="flex w-full flex-col justify-start gap-4">

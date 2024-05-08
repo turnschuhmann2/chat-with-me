@@ -22,3 +22,16 @@ export async function getPrompts() {
 
   return prompts;
 }
+
+export async function searchPrompts(searchTerm?: string) {
+  const prompts = await db.query.prompts.findMany({
+    where: (prompts, { like }) =>
+      searchTerm ? like(prompts.content, `%${searchTerm}%`) : undefined,
+    orderBy: (prompts, { asc }) => [asc(prompts.relevance)],
+    with: {
+      responses: true,
+    },
+  });
+
+  return prompts;
+}
