@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+import { theme } from "./src/styles/theme";
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -19,25 +21,26 @@ const config = {
     },
     extend: {
       colors: {
-        primary: "rgba(148, 255, 82, 1)",
-        primaryContent: "rgba(24, 48, 10, 1)",
+        primary: theme.colors.primary,
+        primaryContent: theme.colors.primaryContent,
 
-        secondary: "rgba(62, 70, 67, 1)",
-        secondaryContent: "rgba(248, 248, 248, 1)",
+        secondary: theme.colors.secondary,
+        secondaryContent: theme.colors.secondaryContent,
 
-        default: "rgba(214, 220, 218, 1)",
-        defaultContent: "rgba(0, 0, 0, 1)",
-        defaultHover: "rgba(251, 252, 252, 1)",
+        default: theme.colors.default,
+        defaultContent: theme.colors.defaultContent,
+        defaultHover: theme.colors.defaultHover,
+        defaultDisabled: theme.colors.defaultDisabled,
 
-        neutral: "rgba(18, 65, 44, 1)",
-        neutralContent: "rgba(255, 255, 255, 1)",
+        neutral: theme.colors.neutral,
+        neutralContent: theme.colors.neutralContent,
 
-        accent: "rgba(103, 255, 196, 1)",
-        accentContent: "rgba(0, 0, 0, 0.9)",
+        accent: theme.colors.accent,
+        accentContent: theme.colors.accentContent,
 
-        darkTransparent50: "rgba(0, 0, 0, 0.50)",
-        lightTransparent50: " rgba(255, 255, 255, 0.5)",
-        lightTransparent80: " rgba(255, 255, 255, 0.8)",
+        darkTransparent50: theme.colors.darkTransparent50,
+        lightTransparent50: theme.colors.lightTransparent50,
+        lightTransparent80: theme.colors.lightTransparent80,
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

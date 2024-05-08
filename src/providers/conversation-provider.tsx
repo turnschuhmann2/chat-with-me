@@ -17,6 +17,7 @@ interface ConversationContextInterface {
   chatBubbles: BubbleInterface[];
   postPrompt: (prompt: Prompt) => Promise<void>;
   setChatBubbles: React.Dispatch<React.SetStateAction<BubbleInterface[]>>;
+  waitingForResponse: boolean;
 }
 
 export const ConversationContext = createContext<ConversationContextInterface>(
@@ -29,6 +30,7 @@ export function useConversationContext() {
 
 export default function ConversationProvider({ children }) {
   const [chatBubbles, setChatBubbles] = useState<BubbleInterface[]>([]);
+  const [waitingForResponse, setWaitingForResponse] = useState(false);
 
   const postPrompt = async (prompt: Prompt) => {
     const promptBubble: BubbleInterface = {
@@ -38,6 +40,7 @@ export default function ConversationProvider({ children }) {
     };
 
     setChatBubbles(prev => [promptBubble, ...prev]);
+    setWaitingForResponse(true);
 
     await timeout(500);
 
@@ -74,11 +77,12 @@ export default function ConversationProvider({ children }) {
     };
 
     setChatBubbles(prev => [responseBubble, ...prev]);
+    setWaitingForResponse(false);
   };
 
   return (
     <ConversationContext.Provider
-      value={{ chatBubbles, postPrompt, setChatBubbles }}
+      value={{ chatBubbles, postPrompt, setChatBubbles, waitingForResponse }}
     >
       {children}
     </ConversationContext.Provider>
