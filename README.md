@@ -19,7 +19,9 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 - React Server Components (RSCs) and Server Actions
 - [Framer Motion](https://www.framer.com/motion/) for animation of the chat page
 - [Drizzle ORM](https://orm.drizzle.team/) (with Postgres) for storing data
-- [shadcn/ui](https://ui.shadcn.com/) with [TailwindCSS](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/) for styling
+- [shadcn/ui](https://ui.shadcn.com/) for ui components
+- [Phosphor Icons](https://phosphoricons.com/) for icon components
 
 ## TODO
 

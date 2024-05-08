@@ -1,6 +1,8 @@
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
+import { Plus, Trash } from "@phosphor-icons/react/dist/ssr";
+
 import { env } from "process";
 
 import { createPrompt, deletePrompt } from "@/server/db/mutations";
@@ -39,9 +41,9 @@ export default async function EditPage() {
                 >
                   <button
                     type="submit"
-                    className="flex h-12 w-12 items-center justify-center"
+                    className="flex items-center justify-center p-3"
                   >
-                    <div className="material-symbols-rounded">Delete</div>
+                    <Trash size={"1.5rem"} weight="duotone" />
                   </button>
                 </form>
               </div>
@@ -61,9 +63,9 @@ export default async function EditPage() {
               >
                 <button
                   type="submit"
-                  className="flex h-12 w-12 items-center justify-center"
+                  className="flex items-center justify-center p-3"
                 >
-                  <div className="material-symbols-rounded">Add</div>
+                  <Plus size={"1.5rem"} />
                 </button>
               </form>
             </div>

@@ -40,16 +40,13 @@ export async function deletePrompt(promptId: number) {
       await tx.delete(responses).where(eq(responses.promptId, promptId));
       await tx.delete(prompts).where(eq(prompts.id, promptId));
     });
-
-    // await db.delete(responses).where(eq(responses.promptId, promptId));
-    // await db.delete(prompts).where(eq(prompts.id, promptId));
   } catch (e) {
     if (e instanceof DrizzleError) {
       // Handle Drizzle-specific errors
-    }
-
-    if (e instanceof TransactionRollbackError) {
+    } else if (e instanceof TransactionRollbackError) {
       // Handle transaction rollback errors
+    } else {
+      // Handle other errors
     }
   }
 }
