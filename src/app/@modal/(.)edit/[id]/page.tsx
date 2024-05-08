@@ -1,23 +1,24 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/server/db";
-import { prompts, responses } from "@/server/db/schema";
+import { responses } from "@/server/db/schema";
 
-import { Modal } from "./modal";
 import { revalidatePath } from "next/cache";
+import { Modal } from "./modal";
+
+import {
+  createResponse,
+  updatePromptContent,
+  updateResponseContent,
+} from "@/server/db/mutations";
+import { getSinglePrompt } from "@/server/db/queries";
 
 export default async function PromptModal({
   params: { id: promptId },
 }: {
   params: { id: number };
 }) {
-  const prompt = await db.query.prompts.findFirst({
-    where: eq(prompts.id, promptId),
-    orderBy: (prompts, { asc }) => [asc(prompts.relevance)],
-    with: {
-      responses: true,
-    },
-  });
+  const prompt = await getSinglePrompt(promptId);
 
   return (
     <Modal>
@@ -29,10 +30,7 @@ export default async function PromptModal({
 
             const content = formData.get("content")?.toString();
 
-            await db
-              .update(prompts)
-              .set({ content })
-              .where(eq(prompts.id, promptId));
+            await updatePromptContent(promptId, content);
 
             revalidatePath(`/edit`);
           }}
@@ -66,10 +64,7 @@ export default async function PromptModal({
 
                 const content = formData.get("content")?.toString();
 
-                await db
-                  .update(responses)
-                  .set({ content })
-                  .where(eq(responses.id, response.id));
+                await updateResponseContent(response.id, content);
 
                 revalidatePath(`/edit`);
               }}
@@ -98,10 +93,7 @@ export default async function PromptModal({
             action={async () => {
               "use server";
 
-              await db.insert(responses).values({
-                content: "my new response",
-                promptId,
-              });
+              await createResponse(promptId, "My new response");
 
               revalidatePath(`/edit`);
             }}

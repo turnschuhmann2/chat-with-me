@@ -1,11 +1,10 @@
-import Link from "next/link";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 
-import { eq } from "drizzle-orm";
 import { env } from "process";
 
-import { db } from "@/server/db";
-import { prompts, responses } from "@/server/db/schema";
+import { createPrompt, deletePrompt } from "@/server/db/mutations";
+import { getPrompts } from "@/server/db/queries";
 
 export const dynamic = "force-dynamic";
 
@@ -13,9 +12,7 @@ export default async function EditPage() {
   // for now, allow editing in development of prompts in dev only
   const allowEdit = env.NODE_ENV === "development";
 
-  const allPrompts = await db.query.prompts.findMany({
-    orderBy: (prompts, { asc }) => [asc(prompts.relevance)],
-  });
+  const allPrompts = await getPrompts();
 
   return (
     allowEdit && (
@@ -35,11 +32,7 @@ export default async function EditPage() {
                   action={async () => {
                     "use server";
 
-                    await db
-                      .delete(responses)
-                      .where(eq(responses.promptId, prompt.id));
-
-                    await db.delete(prompts).where(eq(prompts.id, prompt.id));
+                    await deletePrompt(prompt.id);
 
                     revalidatePath(`/edit`);
                   }}
@@ -59,12 +52,7 @@ export default async function EditPage() {
                 action={async () => {
                   "use server";
 
-                  const newPromptId = await db
-                    .insert(prompts)
-                    .values({
-                      content: "my new prompt",
-                    })
-                    .returning({ id: prompts.id });
+                  await createPrompt("My new prompt");
 
                   revalidatePath(`/edit`);
                   // TODO implement redirect for modal
