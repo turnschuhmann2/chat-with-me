@@ -9,7 +9,7 @@ export const theme = {
     default: "rgba(214, 220, 218, 1)",
     defaultContent: "rgba(0, 0, 0, 1)",
     defaultHover: "rgba(251, 252, 252, 1)",
-    defaultDisabled: "rgba(189, 189, 189, 1)",
+    defaultDisabled: "rgba(197, 205, 201, 1)",
 
     neutral: "rgba(18, 65, 44, 1)",
     neutralContent: "rgba(255, 255, 255, 1)",
