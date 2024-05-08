@@ -1,13 +1,15 @@
 "use client";
 
-import type { BubbleInterface } from "../providers/conversation-provider";
+import { clsx } from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { useConversationContext } from "../providers/conversation-provider";
-import { AnimatePresence, motion } from "framer-motion";
-import { clsx } from "clsx";
 import TypingBubble from "./typing-bubble";
+
+import type { BubbleInterface } from "../providers/conversation-provider";
+import { useConversationContext } from "../providers/conversation-provider";
 
 const container = {
   hidden: {
@@ -28,6 +30,16 @@ const container = {
 export default function ConversationContainer() {
   const { chatBubbles } = useConversationContext();
 
+  const ref = useRef(null);
+
+  // const scrollToBottom = () => {
+  //   (ref.current! as HTMLElement).scrollIntoView({ behavior: "smooth" });
+  // };
+
+  // useEffect(() => {
+  //   scrollToBottom();
+  // });
+
   return (
     <motion.div
       layout
@@ -35,6 +47,7 @@ export default function ConversationContainer() {
       className="scroll-gutter flex h-full w-full flex-col-reverse gap-3 overflow-y-auto p-2"
     >
       <AnimatePresence initial={false}>
+        <div ref={ref} />
         {chatBubbles.map((bubble: BubbleInterface) => (
           <motion.div
             layout

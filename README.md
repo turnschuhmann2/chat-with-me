@@ -44,6 +44,7 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 - [ ] Add a system to prompts and responses that links next prompts to previous responses, so the best prompts can be shown in the bar after a response was returned.
 - [ ] Add more prompts & responses
 - [ ] if the response contains multiple parts (eg divided by line breaks), split them into multiple bubbles (?)
+- [ ] fix scroll (automatically scroll down when new reponse appeared)
 
 ### Backlog
 
