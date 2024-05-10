@@ -65,3 +65,13 @@ export const responseRelations = relations(responses, ({ one }) => ({
 }));
 
 export type Response = typeof responses.$inferSelect;
+
+export const defaultAvatars = createTable("default_avatars", {
+  id: serial("id").primaryKey(),
+  fileName: text("name").notNull(),
+  fileUrl: text("url").notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updatedAt"),
+});
