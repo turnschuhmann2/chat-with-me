@@ -1,7 +1,7 @@
 import "server-only";
 
 import { db } from "@/server/db";
-import { prompts } from "@/server/db/schema";
+import { prompts, defaultAvatars } from "@/server/db/schema";
 
 export async function getSinglePrompt(promptId: number) {
   const prompt = await db.query.prompts.findFirst({
@@ -34,4 +34,22 @@ export async function searchPrompts(searchTerm?: string) {
   });
 
   return prompts;
+}
+
+export async function getAvatars() {
+  const avatars = await db.query.defaultAvatars.findMany();
+
+  return avatars;
+}
+
+export async function getSingleAvatar(avatarId: number) {
+  const avatar = await db.query.defaultAvatars.findFirst({
+    where: (_, { eq }) => eq(defaultAvatars.id, avatarId),
+  });
+
+  if (!avatar) {
+    throw new Error(`No avatar found with id ${avatarId}`);
+  }
+
+  return avatar;
 }

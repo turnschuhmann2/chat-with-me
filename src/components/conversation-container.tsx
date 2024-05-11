@@ -2,14 +2,15 @@
 
 import { clsx } from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import type { Avatar } from "@/server/db/schema";
 
 import TypingBubble from "./typing-bubble";
 
 import type { BubbleInterface } from "../providers/conversation-provider";
 import { useConversationContext } from "../providers/conversation-provider";
+import ChatBubbleAvatar from "./chat-bubble-avatar";
 
 const container = {
   hidden: {
@@ -27,7 +28,7 @@ const container = {
   },
 };
 
-export default function ConversationContainer() {
+export default function ConversationContainer(props: { avatar: Avatar }) {
   const { chatBubbles } = useConversationContext();
 
   const ref = useRef(null);
@@ -61,10 +62,7 @@ export default function ConversationContainer() {
             animate="visible"
             exit="hidden"
           >
-            <Avatar className="size-8 md:size-10">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <ChatBubbleAvatar avatar={props.avatar} />
 
             <div
               className={clsx(

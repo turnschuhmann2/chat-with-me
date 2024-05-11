@@ -1,6 +1,3 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
 import { relations, sql } from "drizzle-orm";
 import {
   pgTableCreator,
@@ -10,12 +7,7 @@ import {
   integer,
 } from "drizzle-orm/pg-core";
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
+// Use the same database instance for multiple projects.
 export const createTable = pgTableCreator(name => `chat-with-me_${name}`);
 
 // export const topics = createTable("topics", {
@@ -45,8 +37,6 @@ export type Prompt = typeof prompts.$inferSelect & {
   responses: Response[];
 };
 
-// export type PromptInput = typeof prompts.$inferInsert;
-
 export const responses = createTable("responses", {
   id: serial("id").primaryKey(),
   content: text("content"),
@@ -75,3 +65,5 @@ export const defaultAvatars = createTable("default_avatars", {
     .notNull(),
   updatedAt: timestamp("updatedAt"),
 });
+
+export type Avatar = typeof defaultAvatars.$inferSelect;
