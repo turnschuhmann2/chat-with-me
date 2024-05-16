@@ -77,9 +77,7 @@ export default function ConversationContainer(props: { avatar: Avatar }) {
               {bubble.loading ? (
                 <TypingBubble key="loading" />
               ) : (
-                <div key="text" className="flex">
-                  {bubble.content}
-                </div>
+                <p className="break-normal">{bubble.content}</p>
               )}
             </div>
           </motion.div>
