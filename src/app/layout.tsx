@@ -32,7 +32,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main className="gradient-background flex h-dvh min-h-dvh flex-row items-center justify-center">
+            <div className="container flex h-full flex-row items-center justify-between gap-8 px-2 py-2 md:px-8 md:py-12 ">
+              {children}
+            </div>
+          </main>
           {modal}
           <div id="modal-root" />
         </ThemeProvider>

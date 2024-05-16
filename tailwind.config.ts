@@ -21,26 +21,7 @@ const config = {
     },
     extend: {
       colors: {
-        primary: theme.colors.primary,
-        primaryContent: theme.colors.primaryContent,
-
-        secondary: theme.colors.secondary,
-        secondaryContent: theme.colors.secondaryContent,
-
-        default: theme.colors.default,
-        defaultContent: theme.colors.defaultContent,
-        defaultHover: theme.colors.defaultHover,
-        defaultDisabled: theme.colors.defaultDisabled,
-
-        neutral: theme.colors.neutral,
-        neutralContent: theme.colors.neutralContent,
-
-        accent: theme.colors.accent,
-        accentContent: theme.colors.accentContent,
-
-        darkTransparent50: theme.colors.darkTransparent50,
-        lightTransparent50: theme.colors.lightTransparent50,
-        lightTransparent80: theme.colors.lightTransparent80,
+        ...theme.colors,
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

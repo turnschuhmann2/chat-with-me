@@ -6,6 +6,9 @@ export const theme = {
     secondary: "rgba(62, 70, 67, 1)",
     secondaryContent: "rgba(248, 248, 248, 1)",
 
+    tertiary: "rgba(106, 160, 139, 1)",
+    tertiaryContent: "rgba(255, 255, 255, 1)",
+
     default: "rgba(214, 220, 218, 1)",
     defaultContent: "rgba(0, 0, 0, 1)",
     defaultHover: "rgba(251, 252, 252, 1)",
@@ -18,6 +21,9 @@ export const theme = {
     accentContent: "rgba(0, 0, 0, 0.9)",
 
     darkTransparent50: "rgba(0, 0, 0, 0.50)",
+    darkTransparent60: "rgba(0, 0, 0, 0.60)",
+    lightTransparent10: " rgba(255, 255, 255, 0.1)",
+    lightTransparent15: " rgba(255, 255, 255, 0.15)",
     lightTransparent50: " rgba(255, 255, 255, 0.5)",
     lightTransparent80: " rgba(255, 255, 255, 0.8)",
   },
