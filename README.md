@@ -38,8 +38,8 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 - [x] Block new prompts until response was posted
 - [x] change title and info, change favicon
 - [x] improve implementation for icons (have a look at phosphoricons)
+- [x] add authentication using clerk
 - [ ] implement navbar
-- [ ] add authentication using clerk
 - [ ] implement chatbot overview page
 - [ ] Add image avatars using file host
 - [ ] Add option to select your guest avatar
