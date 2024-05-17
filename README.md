@@ -29,8 +29,8 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 
 - [x] add authentication using clerk
 - [x] implement basic navbar
-- [ ] implement guest avatar
-- [ ] implement chatbot collection in drizzle
+- [x] implement guest avatar
+- [x] implement chatbot collection in drizzle
 - [ ] implement chatbot overview page
 - [ ] Add image avatars assignable to chatbots using file host
 - [ ] Implement edit chatbot page
