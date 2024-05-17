@@ -1,6 +1,8 @@
 import { ThemeProvider } from "~/providers/theme-provider";
 import { Inter } from "next/font/google";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 import "@/styles/globals.css";
 import "@/styles/scroll.css";
 
@@ -24,23 +26,25 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <main className="gradient-background flex h-dvh min-h-dvh flex-row items-center justify-center">
-            <div className="container flex h-full flex-row items-center justify-between gap-8 px-2 py-2 md:px-8 md:py-12 ">
-              {children}
-            </div>
-          </main>
-          {modal}
-          <div id="modal-root" />
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={`font-sans ${inter.variable}`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main className="gradient-background flex h-dvh min-h-dvh flex-row items-center justify-center">
+              <div className="container flex h-full flex-row items-center justify-between gap-8 px-2 py-2 md:px-8 md:py-12 ">
+                {children}
+              </div>
+            </main>
+            {modal}
+            <div id="modal-root" />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

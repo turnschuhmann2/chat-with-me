@@ -5,21 +5,18 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 
-import {
-  ArrowsLeftRight,
-  DotsThreeOutlineVertical,
-} from "@phosphor-icons/react/dist/ssr";
+import { ArrowsLeftRight } from "@phosphor-icons/react/dist/ssr";
 
 import {
   Avatar as AvatarComponent,
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
-import { TypographyBody } from "@/components/ui/typography";
 
 import { theme } from "@/styles/theme";
 
 import MenuItems from "./menu-items";
+import UserSection from "./user-section";
 
 export default function LeftNavbar() {
   const user = {
@@ -52,24 +49,7 @@ export default function LeftNavbar() {
         <MenuItems />
       </div>
 
-      <div className="bg-lightTransparent10 flex flex-row justify-center gap-4 px-4 pb-8 pt-4">
-        <AvatarComponent className="size-12">
-          <AvatarImage src={user.avatar} />
-          <AvatarFallback>CN</AvatarFallback>
-        </AvatarComponent>
-
-        {/* {isExpanded && (
-          <div className="flex size-full flex-row items-center justify-between">
-            <TypographyBody color="neutral">{user.name}</TypographyBody>
-
-            <DotsThreeOutlineVertical
-              size={24}
-              color={theme.colors.lightTransparent80}
-              weight="fill"
-            />
-          </div>
-        )} */}
-      </div>
+      <UserSection />
     </motion.div>
   );
 }

@@ -15,6 +15,7 @@ export const theme = {
     defaultDisabled: "rgba(197, 205, 201, 1)",
 
     neutral: "rgba(18, 65, 44, 1)",
+    neutral80: "rgba(18, 65, 44, 0.8)",
     neutralContent: "rgba(255, 255, 255, 1)",
 
     accent: "rgba(103, 255, 196, 1)",

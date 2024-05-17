@@ -32,7 +32,7 @@ export default function MenuItems() {
         <Link
           key={index}
           className={clsx(
-            "hover:bg-lightTransparent15 flex flex-col items-center rounded-xl p-4",
+            "flex flex-col items-center rounded-xl p-4 duration-100 hover:bg-lightTransparent15",
             pathname === item.path && "bg-lightTransparent15",
           )}
           href={item.path}
