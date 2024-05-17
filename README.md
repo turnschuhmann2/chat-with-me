@@ -31,7 +31,9 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 - [x] implement basic navbar
 - [x] implement guest avatar
 - [x] implement chatbot collection in drizzle
-- [ ] implement chatbot overview page
+- [ ] implement chatbot overview page skeleton
+- [ ] add data to chatbot overview page
+- [ ] add functionality to chatbot switch (add "currentChatbot" field to clerk user metadata)
 - [ ] Add image avatars assignable to chatbots using file host
 - [ ] Implement edit chatbot page
 

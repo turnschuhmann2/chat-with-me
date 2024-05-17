@@ -1,4 +1,4 @@
-import { desc, relations, sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 
 import {
   pgTableCreator,
@@ -12,18 +12,9 @@ import {
 // Use the same database instance for multiple projects.
 export const createTable = pgTableCreator(name => `chat-with-me_${name}`);
 
-// export const topics = createTable("topics", {
-//   id: serial("id").primaryKey(),
-//   name: text("name").notNull(),
-//   createdAt: timestamp("created_at")
-//     .default(sql`CURRENT_TIMESTAMP`)
-//     .notNull(),
-//   updatedAt: timestamp("updatedAt"),
-// });
-
 export const prompts = createTable("prompts", {
   id: serial("id").primaryKey(),
-  chatBotId: integer("chat_bot_id"),
+  chatbotId: integer("chat_bot_id"),
   content: text("content").notNull(),
   relevance: integer("relevance"),
   createdAt: timestamp("created_at")
@@ -34,15 +25,15 @@ export const prompts = createTable("prompts", {
 
 export const promptRelations = relations(prompts, ({ many, one }) => ({
   responses: many(responses),
-  chatBots: one(chatBots, {
-    fields: [prompts.chatBotId],
-    references: [chatBots.id],
+  chatbots: one(chatbots, {
+    fields: [prompts.chatbotId],
+    references: [chatbots.id],
   }),
 }));
 
 export type Prompt = typeof prompts.$inferSelect & {
   responses: Response[];
-  chatBot: ChatBot;
+  chatbot: Chatbot;
 };
 
 export const responses = createTable("responses", {
@@ -64,7 +55,7 @@ export const responseRelations = relations(responses, ({ one }) => ({
 
 export type Response = typeof responses.$inferSelect;
 
-export const defaultAvatars = createTable("default_avatars", {
+export const avatars = createTable("avatars", {
   id: serial("id").primaryKey(),
   fileName: text("name").notNull(),
   fileUrl: text("url").notNull(),
@@ -74,9 +65,9 @@ export const defaultAvatars = createTable("default_avatars", {
   updatedAt: timestamp("updatedAt"),
 });
 
-export type Avatar = typeof defaultAvatars.$inferSelect;
+export type Avatar = typeof avatars.$inferSelect;
 
-export const chatBots = createTable("chat_bots", {
+export const chatbots = createTable("chatbots", {
   id: serial("id").primaryKey(),
   avatarId: integer("avatar_id"),
   clerkUserId: text("user_id"),
@@ -91,15 +82,15 @@ export const chatBots = createTable("chat_bots", {
   updatedAt: timestamp("updatedAt"),
 });
 
-export const chatBotRelations = relations(chatBots, ({ one, many }) => ({
-  avatar: one(defaultAvatars, {
-    fields: [chatBots.avatarId],
-    references: [defaultAvatars.id],
+export const chatbotRelations = relations(chatbots, ({ one, many }) => ({
+  avatar: one(avatars, {
+    fields: [chatbots.avatarId],
+    references: [avatars.id],
   }),
   prompts: many(prompts),
 }));
 
-export type ChatBot = typeof chatBots.$inferSelect & {
+export type Chatbot = typeof chatbots.$inferSelect & {
   avatar: Avatar;
   prompts: Prompt[];
 };

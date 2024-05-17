@@ -1,7 +1,7 @@
 import "server-only";
 
 import { db } from "@/server/db";
-import { prompts, defaultAvatars } from "@/server/db/schema";
+import { prompts, avatars } from "@/server/db/schema";
 
 export async function getSinglePrompt(promptId: number) {
   const prompt = await db.query.prompts.findFirst({
@@ -44,7 +44,7 @@ export async function getAvatars() {
 
 export async function getSingleAvatar(avatarId: number) {
   const avatar = await db.query.defaultAvatars.findFirst({
-    where: (_, { eq }) => eq(defaultAvatars.id, avatarId),
+    where: (_, { eq }) => eq(avatars.id, avatarId),
   });
 
   if (!avatar) {
