@@ -11,7 +11,7 @@ import {
 } from "drizzle-orm/pg-core";
 
 // Use the same database instance for multiple projects.
-export const createTable = pgTableCreator(name => `chat-with-me_${name}`);
+export const createTable = pgTableCreator(name => `chat_with_me_${name}`);
 
 export const prompts = createTable("prompts", {
   id: serial("id").primaryKey(),

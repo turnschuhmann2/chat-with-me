@@ -65,11 +65,7 @@ export default function ChatProvider(props: {
 
     setChatBubbles(prev => [loadingBubble, ...prev]);
 
-    const responseLength = prompt.responses[0]?.content?.length;
-
-    if (!responseLength) {
-      return;
-    }
+    const responseLength = prompt.responses[0]?.content?.length ?? 0;
 
     const delay = 1000 + responseLength * 2;
 
