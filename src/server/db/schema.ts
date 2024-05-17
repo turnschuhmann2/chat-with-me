@@ -7,6 +7,7 @@ import {
   text,
   integer,
   boolean,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 
 // Use the same database instance for multiple projects.
@@ -70,7 +71,7 @@ export type Avatar = typeof avatars.$inferSelect;
 export const chatbots = createTable("chatbots", {
   id: serial("id").primaryKey(),
   avatarId: integer("avatar_id"),
-  clerkUserId: text("user_id"),
+  creatorUserId: integer("creator_user_id"),
   name: text("name").notNull(),
   description: text("description"),
   favored: boolean("favored").default(false),
@@ -88,9 +89,57 @@ export const chatbotRelations = relations(chatbots, ({ one, many }) => ({
     references: [avatars.id],
   }),
   prompts: many(prompts),
+  chatbotsToUsers: many(chatbotsToUsers),
 }));
 
 export type Chatbot = typeof chatbots.$inferSelect & {
   avatar: Avatar;
   prompts: Prompt[];
+};
+
+export const chatbotsToUsers = createTable(
+  "chatbots_to_users",
+  {
+    chatbotId: integer("chatbot_id").notNull(),
+    // .references(() => users.id),
+    userId: integer("user_id").notNull(),
+    // .references(() => chatbots.id),
+  },
+  t => ({
+    pk: primaryKey({
+      columns: [t.userId, t.chatbotId],
+      name: "pk_chatbot_to_user",
+    }),
+  }),
+);
+
+export const chatbotsToUsersRelations = relations(
+  chatbotsToUsers,
+  ({ one }) => ({
+    chatbot: one(chatbots, {
+      fields: [chatbotsToUsers.chatbotId],
+      references: [chatbots.id],
+    }),
+    user: one(users, {
+      fields: [chatbotsToUsers.userId],
+      references: [users.id],
+    }),
+  }),
+);
+
+export const users = createTable("users", {
+  id: serial("id").primaryKey(),
+  clerkUserId: text("clerk_user_id"),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updatedAt"),
+});
+
+export const usersRelations = relations(users, ({ many }) => ({
+  chatbotsToUsers: many(chatbotsToUsers),
+}));
+
+export type User = typeof users.$inferSelect & {
+  chatbots: Chatbot[];
 };

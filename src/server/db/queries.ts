@@ -37,19 +37,19 @@ export async function searchPrompts(searchTerm?: string) {
 }
 
 export async function getAvatars() {
-  const avatars = await db.query.defaultAvatars.findMany();
+  const avatars = await db.query.avatars.findMany();
 
   return avatars;
 }
 
 export async function getSingleAvatar(avatarId: number) {
-  const avatar = await db.query.defaultAvatars.findFirst({
+  const avatar = await db.query.avatars.findFirst({
     where: (_, { eq }) => eq(avatars.id, avatarId),
   });
 
-  if (!avatar) {
-    throw new Error(`No avatar found with id ${avatarId}`);
-  }
+  // if (!avatar) {
+  //   throw new Error(`No avatar found with id ${avatarId}`);
+  // }
 
   return avatar;
 }

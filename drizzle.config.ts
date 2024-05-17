@@ -9,4 +9,5 @@ export default defineConfig({
     url: env.POSTGRES_URL,
   },
   tablesFilter: ["chat-with-me_*"],
+  out: "./drizzle",
 });
