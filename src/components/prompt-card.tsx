@@ -1,19 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
-
 import type { Prompt } from "@/server/db/schema";
-import { theme } from "@/styles/theme";
 
 import { useConversationContext } from "../providers/conversation-provider";
+import clsx from "clsx";
 
 export default function PromptCard(props: { prompt: Prompt }) {
   const { postPrompt, waitingForResponse } = useConversationContext();
-
-  const [isHovered, _setIsHovered] = useState(false);
-
-  const setIsHovered = (value: boolean) => () => _setIsHovered(value);
 
   const handlePromptCardClick = () => {
     if (!waitingForResponse) {
@@ -21,27 +14,16 @@ export default function PromptCard(props: { prompt: Prompt }) {
     }
   };
 
-  const getBackgroundColor = () => {
-    if (waitingForResponse) {
-      return theme.colors.defaultDisabled;
-    } else if (isHovered) {
-      return theme.colors.defaultHover;
-    } else {
-      return theme.colors.default;
-    }
-  };
-
   return (
-    <motion.div
-      className={"rounded-xl px-3 py-2 text-defaultContent shadow-xl  md:h-16"}
+    <div
+      className={clsx(
+        "cursor-pointer rounded-xl bg-default px-3 py-2 text-defaultContent shadow-2xl duration-300 hover:bg-defaultHover md:h-16",
+        waitingForResponse &&
+          "cursor-default bg-defaultDisabled hover:bg-defaultDisabled",
+      )}
       onClick={handlePromptCardClick}
-      onHoverStart={setIsHovered(true)}
-      onHoverEnd={setIsHovered(false)}
-      initial={{ backgroundColor: theme.colors.default }}
-      animate={{ backgroundColor: getBackgroundColor() }}
-      transition={{ duration: 0.3 }}
     >
       {props.prompt.content}
-    </motion.div>
+    </div>
   );
 }
