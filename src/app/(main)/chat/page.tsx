@@ -1,7 +1,7 @@
-import ConversationContainer from "@/components/conversation-container";
-import PromptInputBar from "@/components/prompt-input-bar";
+import ChatContainer from "~/components/chat";
+import PromptInputBar from "@/components/prompt-input";
 
-import ConversationProvider from "@/providers/conversation-provider";
+import ChatProvider from "@/providers/chat-provider";
 
 import { getSingleAvatar } from "@/server/db/queries";
 
@@ -15,12 +15,12 @@ export default async function ChatPage(props: {
   const user = await currentUser();
 
   return (
-    <ConversationProvider userImageUrl={user?.imageUrl}>
-      <ConversationContainer avatar={responseAvatar} />
+    <ChatProvider userImageUrl={user?.imageUrl}>
+      <ChatContainer avatar={responseAvatar} />
 
       <div className="h-[1px] bg-tertiary" />
 
       <PromptInputBar searchParams={props.searchParams} />
-    </ConversationProvider>
+    </ChatProvider>
   );
 }

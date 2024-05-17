@@ -1,12 +1,13 @@
 "use client";
 
-import type { Prompt } from "@/server/db/schema";
-
-import { useConversationContext } from "../providers/conversation-provider";
 import clsx from "clsx";
 
+import { useChatContext } from "@/providers/chat-provider";
+
+import type { Prompt } from "@/server/db/schema";
+
 export default function PromptCard(props: { prompt: Prompt }) {
-  const { postPrompt, waitingForResponse } = useConversationContext();
+  const { postPrompt, waitingForResponse } = useChatContext();
 
   const handlePromptCardClick = () => {
     if (!waitingForResponse) {

@@ -8,10 +8,7 @@ import {
 
 import GuestAvatar from "@/components/guest-avatar";
 
-import {
-  useConversationContext,
-  type MessageType,
-} from "@/providers/conversation-provider";
+import { useChatContext, type MessageType } from "@/providers/chat-provider";
 
 import type { Avatar } from "@/server/db/schema";
 
@@ -19,7 +16,7 @@ export default function ChatBubbleAvatar(props: {
   avatar: Avatar;
   messageType: MessageType;
 }) {
-  const { userImageUrl } = useConversationContext();
+  const { userImageUrl } = useChatContext();
 
   return (
     <AvatarComponent className="size-8 md:size-10">

@@ -1,7 +1,7 @@
-import { ThemeProvider } from "~/providers/theme-provider";
 import { Inter } from "next/font/google";
-
 import { ClerkProvider } from "@clerk/nextjs";
+
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "@/styles/globals.css";
 import "@/styles/scroll.css";

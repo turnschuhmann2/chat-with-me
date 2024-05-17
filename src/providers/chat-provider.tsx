@@ -20,7 +20,7 @@ export interface BubbleInterface {
   loading?: boolean;
 }
 
-interface ConversationContextInterface {
+interface ChatContextInterface {
   chatBubbles: BubbleInterface[];
   postPrompt: (prompt: Prompt) => Promise<void>;
   setChatBubbles: React.Dispatch<React.SetStateAction<BubbleInterface[]>>;
@@ -28,15 +28,15 @@ interface ConversationContextInterface {
   userImageUrl?: string;
 }
 
-export const ConversationContext = createContext<ConversationContextInterface>(
-  {} as ConversationContextInterface,
+export const ChatContext = createContext<ChatContextInterface>(
+  {} as ChatContextInterface,
 );
 
-export function useConversationContext() {
-  return useContext(ConversationContext);
+export function useChatContext() {
+  return useContext(ChatContext);
 }
 
-export default function ConversationProvider(props: {
+export default function ChatProvider(props: {
   userImageUrl?: string;
   children: React.ReactNode;
 }) {
@@ -103,8 +103,8 @@ export default function ConversationProvider(props: {
   );
 
   return (
-    <ConversationContext.Provider value={contextValue}>
+    <ChatContext.Provider value={contextValue}>
       {props.children}
-    </ConversationContext.Provider>
+    </ChatContext.Provider>
   );
 }
