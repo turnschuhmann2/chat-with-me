@@ -5,7 +5,7 @@ import ChatProvider from "@/providers/chat-provider";
 
 import { getSingleAvatar } from "@/server/db/queries";
 
-import { User, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function ChatPage(props: {
   searchParams?: { query?: string; page?: string };
@@ -16,7 +16,7 @@ export default async function ChatPage(props: {
 
   return (
     <ChatProvider userImageUrl={user?.imageUrl}>
-      <ChatContainer avatar={responseAvatar} />
+      <ChatContainer avatar={responseAvatar!} />
 
       <div className="h-[1px] bg-tertiary" />
 

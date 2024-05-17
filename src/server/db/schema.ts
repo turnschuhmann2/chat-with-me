@@ -89,7 +89,7 @@ export const chatbotRelations = relations(chatbots, ({ one, many }) => ({
     references: [avatars.id],
   }),
   prompts: many(prompts),
-  chatbotsToUsers: many(chatbotsToUsers),
+  // chatbotsToUsers: many(chatbotsToUsers),
 }));
 
 export type Chatbot = typeof chatbots.$inferSelect & {
@@ -97,49 +97,36 @@ export type Chatbot = typeof chatbots.$inferSelect & {
   prompts: Prompt[];
 };
 
-export const chatbotsToUsers = createTable(
-  "chatbots_to_users",
-  {
-    chatbotId: integer("chatbot_id").notNull(),
-    // .references(() => users.id),
-    userId: integer("user_id").notNull(),
-    // .references(() => chatbots.id),
-  },
-  t => ({
-    pk: primaryKey({
-      columns: [t.userId, t.chatbotId],
-      name: "pk_chatbot_to_user",
-    }),
-  }),
-);
+// export const chatbotsToUsers = createTable("chatbots_to_users", {
+//   id: serial("id").primaryKey(),
+//   chatbotId: integer("chatbot_id").notNull(),
+//   clerkUserId: text("clerk_user_id").notNull(),
+//   relationType: text("relation_type").notNull(),
+// });
 
-export const chatbotsToUsersRelations = relations(
-  chatbotsToUsers,
-  ({ one }) => ({
-    chatbot: one(chatbots, {
-      fields: [chatbotsToUsers.chatbotId],
-      references: [chatbots.id],
-    }),
-    user: one(users, {
-      fields: [chatbotsToUsers.userId],
-      references: [users.id],
-    }),
-  }),
-);
+// export const chatbotsToUsersRelations = relations(
+//   chatbotsToUsers,
+//   ({ one }) => ({
+//     chatbot: one(chatbots, {
+//       fields: [chatbotsToUsers.chatbotId],
+//       references: [chatbots.id],
+//     }),
+//   }),
+// );
 
-export const users = createTable("users", {
-  id: serial("id").primaryKey(),
-  clerkUserId: text("clerk_user_id"),
-  createdAt: timestamp("created_at")
-    .default(sql`CURRENT_TIMESTAMP`)
-    .notNull(),
-  updatedAt: timestamp("updatedAt"),
-});
+// export const users = createTable("users", {
+//   id: serial("id").primaryKey(),
+//   clerkUserId: text("clerk_user_id"),
+//   createdAt: timestamp("created_at")
+//     .default(sql`CURRENT_TIMESTAMP`)
+//     .notNull(),
+//   updatedAt: timestamp("updatedAt"),
+// });
 
-export const usersRelations = relations(users, ({ many }) => ({
-  chatbotsToUsers: many(chatbotsToUsers),
-}));
+// export const usersRelations = relations(users, ({ many }) => ({
+//   chatbotsToUsers: many(chatbotsToUsers),
+// }));
 
-export type User = typeof users.$inferSelect & {
-  chatbots: Chatbot[];
-};
+// export type User = typeof users.$inferSelect & {
+//   chatbots: Chatbot[];
+// };
