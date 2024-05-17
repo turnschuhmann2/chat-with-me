@@ -6,12 +6,14 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar";
 
-import type { Avatar } from "@/server/db/schema";
+import GuestAvatar from "@/components/guest-avatar";
 
 import {
   useConversationContext,
   type MessageType,
 } from "@/providers/conversation-provider";
+
+import type { Avatar } from "@/server/db/schema";
 
 export default function ChatBubbleAvatar(props: {
   avatar: Avatar;
@@ -23,10 +25,12 @@ export default function ChatBubbleAvatar(props: {
     <AvatarComponent className="size-8 md:size-10">
       <AvatarImage
         src={
-          props.messageType === "prompt" ? userImageUrl : props.avatar.fileUrl
+          props.messageType === "response" ? props.avatar.fileUrl : userImageUrl
         }
       />
-      <AvatarFallback>CN</AvatarFallback>
+      <AvatarFallback>
+        <GuestAvatar />
+      </AvatarFallback>
     </AvatarComponent>
   );
 }

@@ -27,30 +27,18 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 
 ### High Priority
 
-- [x] make app usable for mobile
-- [x] add basic page for editing prompts
-- [x] restructure \_components, \_hooks and \_providers folders
-- [x] make Chat bubbles not take up more than 60 or 70% of the total width
-- [x] make loading time depend on the response length
-- [x] limit prompt container height
-- [x] fix chat container scroll
-- [x] fix total height for phone screen
-- [x] Block new prompts until response was posted
-- [x] change title and info, change favicon
-- [x] improve implementation for icons (have a look at phosphoricons)
 - [x] add authentication using clerk
-- [ ] implement navbar
+- [x] implement basic navbar
+- [ ] implement guest avatar
+- [ ] implement chatbot collection in drizzle
 - [ ] implement chatbot overview page
-- [ ] Add image avatars using file host
-- [ ] Add option to select your guest avatar
-- [ ] Implement page to create custom chat bots
-- [ ] Add responses with images
-- [ ] Add a system to prompts and responses that links next prompts to previous responses, so the best prompts can be shown in the bar after a response was returned.
-- [ ] Add more prompts & responses
-- [ ] if the response contains multiple parts (eg divided by line breaks), split them into multiple bubbles (?)
+- [ ] Add image avatars assignable to chatbots using file host
+- [ ] Implement edit chatbot page
 
 ### Backlog
 
-- [ ] Build the homepage, add redirect to /home
-- [ ] Build the chatbot page
-- [ ] add error handler
+- Implement UI for mobile
+- Add a system to prompts and responses that links next prompts to previous responses, so the best prompts can be shown in the bar after a response was returned.
+- if the response contains multiple parts (eg divided by line breaks), split them into multiple bubbles (?)
+- Build the homepage, add redirect to /home
+- Add responses with images
