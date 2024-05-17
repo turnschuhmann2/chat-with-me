@@ -1,10 +1,17 @@
 "use client";
 
-import type { Prompt } from "~/server/db/schema";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
-import { createContext, useContext, useState } from "react";
+import type { Prompt } from "@/server/db/schema";
+import { generateId, timeout } from "@/util/common";
 
-import { generateId, timeout } from "~/util/common";
+export type MessageType = "prompt" | "response";
 
 export interface BubbleInterface {
   id: string;
@@ -18,6 +25,7 @@ interface ConversationContextInterface {
   postPrompt: (prompt: Prompt) => Promise<void>;
   setChatBubbles: React.Dispatch<React.SetStateAction<BubbleInterface[]>>;
   waitingForResponse: boolean;
+  userImageUrl?: string;
 }
 
 export const ConversationContext = createContext<ConversationContextInterface>(
@@ -28,11 +36,14 @@ export function useConversationContext() {
   return useContext(ConversationContext);
 }
 
-export default function ConversationProvider({ children }) {
+export default function ConversationProvider(props: {
+  userImageUrl?: string;
+  children: React.ReactNode;
+}) {
   const [chatBubbles, setChatBubbles] = useState<BubbleInterface[]>([]);
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 
-  const postPrompt = async (prompt: Prompt) => {
+  const postPrompt = useCallback(async (prompt: Prompt) => {
     const promptBubble: BubbleInterface = {
       id: generateId(),
       content: prompt.content,
@@ -78,13 +89,22 @@ export default function ConversationProvider({ children }) {
 
     setChatBubbles(prev => [responseBubble, ...prev]);
     setWaitingForResponse(false);
-  };
+  }, []);
+
+  const contextValue = useMemo(
+    () => ({
+      chatBubbles,
+      postPrompt,
+      setChatBubbles,
+      waitingForResponse,
+      userImageUrl: props.userImageUrl,
+    }),
+    [chatBubbles, postPrompt, waitingForResponse, props.userImageUrl],
+  );
 
   return (
-    <ConversationContext.Provider
-      value={{ chatBubbles, postPrompt, setChatBubbles, waitingForResponse }}
-    >
-      {children}
+    <ConversationContext.Provider value={contextValue}>
+      {props.children}
     </ConversationContext.Provider>
   );
 }

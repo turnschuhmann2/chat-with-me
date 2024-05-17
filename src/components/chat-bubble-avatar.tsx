@@ -8,10 +8,24 @@ import {
 
 import type { Avatar } from "@/server/db/schema";
 
-export default function ChatBubbleAvatar(props: { avatar: Avatar }) {
+import {
+  useConversationContext,
+  type MessageType,
+} from "@/providers/conversation-provider";
+
+export default function ChatBubbleAvatar(props: {
+  avatar: Avatar;
+  messageType: MessageType;
+}) {
+  const { userImageUrl } = useConversationContext();
+
   return (
     <AvatarComponent className="size-8 md:size-10">
-      <AvatarImage src={props.avatar.fileUrl} />
+      <AvatarImage
+        src={
+          props.messageType === "prompt" ? userImageUrl : props.avatar.fileUrl
+        }
+      />
       <AvatarFallback>CN</AvatarFallback>
     </AvatarComponent>
   );

@@ -62,7 +62,7 @@ export default function ConversationContainer(props: { avatar: Avatar }) {
             animate="visible"
             exit="hidden"
           >
-            <ChatBubbleAvatar avatar={props.avatar} />
+            <ChatBubbleAvatar avatar={props.avatar} messageType={bubble.type} />
 
             <div
               className={clsx(
