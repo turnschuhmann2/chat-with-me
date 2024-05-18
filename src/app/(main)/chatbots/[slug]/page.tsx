@@ -39,19 +39,19 @@ export default function ChatbotsTabContentPage({
 }) {
   const chatbotTab = chatbotTabs[params.slug];
 
-  const tripleChatbots = [
-    ...chatbots,
-    ...chatbots,
-    ...chatbots,
-    ...chatbots,
-    ...chatbots,
-  ];
+  // const tripleChatbots = [
+  //   ...chatbots,
+  //   ...chatbots,
+  //   ...chatbots,
+  //   ...chatbots,
+  //   ...chatbots,
+  // ];
 
   return (
     <div className="relative h-full overflow-y-auto">
       <div className="scroll-gutter h-full overflow-y-auto px-2">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(224px,max-content))] justify-items-start gap-6">
-          {tripleChatbots.map((chatbot, index) => (
+          {chatbots.map((chatbot, index) => (
             <ChatbotCard key={index} chatbot={chatbot} />
           ))}
         </div>
