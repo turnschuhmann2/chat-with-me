@@ -2,7 +2,7 @@
 
 import { cloneElement, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import clsx from "clsx";
 
@@ -14,17 +14,19 @@ const menuItems = [
   {
     label: "Chat",
     icon: <ChatCircleDots />,
-    route: "/chat",
+    route: "chat",
   },
   {
     label: "Manage Chatbots",
     icon: <Robot />,
-    route: "/chatbots/all",
+    route: "chatbots",
   },
 ];
 
 export default function MenuItems() {
   const pathname = usePathname();
+
+  const pathSegments = pathname.split("/");
 
   return (
     <div className="flex h-full flex-col gap-2">
@@ -33,11 +35,11 @@ export default function MenuItems() {
           key={index}
           className={clsx(
             "flex cursor-default flex-col items-center rounded-xl p-4  duration-200",
-            pathname === item.route
+            pathSegments.includes(item.route)
               ? "bg-lightTransparent15"
               : "hover:bg-lightTransparent10",
           )}
-          href={item.route}
+          href={`/${item.route}`}
         >
           {cloneElement(item.icon, {
             size: 28,

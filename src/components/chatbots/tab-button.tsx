@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 
 import clsx from "clsx";
 
-import { chatbotRouteIcons, chatbotRouteLabels } from "./tabs";
+import { chatbotTabs } from "./tabs";
 
 export function TabButton({ route }: { route: string }) {
   const pathname = usePathname();
 
-  const fullRoute = `/chatbots${route}`;
+  const fullRoute = `/chatbots/${route}`;
+
+  const { icon, label } = chatbotTabs[route]!;
 
   return (
     <Link
@@ -20,8 +22,8 @@ export function TabButton({ route }: { route: string }) {
       )}
       href={fullRoute}
     >
-      {chatbotRouteIcons[route]}
-      {chatbotRouteLabels[route]}
+      {icon}
+      {label}
     </Link>
   );
 }

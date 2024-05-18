@@ -12,15 +12,6 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  redirects: async () => {
-    return [
-      {
-        source: "/",
-        destination: "/chat",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default config;
