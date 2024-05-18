@@ -1,11 +1,14 @@
 "use client";
 
+import { cloneElement } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import clsx from "clsx";
 
 import { chatbotTabs } from "./tabs";
+
+import { theme } from "@/styles/theme";
 
 export function TabButton({ route }: { route: string }) {
   const pathname = usePathname();
@@ -22,7 +25,11 @@ export function TabButton({ route }: { route: string }) {
       )}
       href={fullRoute}
     >
-      {icon}
+      {cloneElement(icon, {
+        size: 20,
+        color: theme.colors.lightTransparent80,
+        weight: "fill",
+      })}
       {label}
     </Link>
   );

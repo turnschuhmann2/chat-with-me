@@ -21,12 +21,17 @@ export const theme = {
 
     accent: "rgba(103, 255, 196, 1)",
     accentContent: "rgba(0, 0, 0, 0.9)",
+    accentHover: "rgba(82, 204, 157, 1)",
 
+    darkTransparent10: "rgba(0, 0, 0, 0.1)",
     darkTransparent50: "rgba(0, 0, 0, 0.50)",
     darkTransparent60: "rgba(0, 0, 0, 0.60)",
     lightTransparent10: " rgba(255, 255, 255, 0.1)",
     lightTransparent15: " rgba(255, 255, 255, 0.15)",
     lightTransparent50: " rgba(255, 255, 255, 0.5)",
     lightTransparent80: " rgba(255, 255, 255, 0.8)",
+
+    heartSelected: "rgba(203, 62, 50, 1)",
+    heartHover: "rgba(219, 120, 112, 1)",
   },
 };

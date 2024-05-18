@@ -10,7 +10,7 @@ import { currentUser } from "@clerk/nextjs/server";
 export default async function ChatPage(props: {
   searchParams?: { query?: string; page?: string };
 }) {
-  const responseAvatar = await getSingleAvatar(2);
+  const responseAvatar = await getSingleAvatar(8);
 
   const user = await currentUser();
 

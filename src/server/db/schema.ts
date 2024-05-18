@@ -60,6 +60,8 @@ export const avatars = createTable("avatars", {
   id: serial("id").primaryKey(),
   fileName: text("name").notNull(),
   fileUrl: text("url").notNull(),
+  backgroundColor: text("background_color"),
+  backgroundTransparent: text("background_transparent"),
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

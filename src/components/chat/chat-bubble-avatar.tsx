@@ -24,6 +24,7 @@ export default function ChatBubbleAvatar(props: {
         src={
           props.messageType === "response" ? props.avatar.fileUrl : userImageUrl
         }
+        style={{ backgroundColor: props.avatar.backgroundColor ?? "" }}
       />
       <AvatarFallback>
         <GuestAvatar />

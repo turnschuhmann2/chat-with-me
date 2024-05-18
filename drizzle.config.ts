@@ -8,6 +8,6 @@ export default defineConfig({
   dbCredentials: {
     url: env.POSTGRES_URL,
   },
-  tablesFilter: ["chat-with-me_*"],
+  tablesFilter: ["chat_with_me_*"],
   out: "./drizzle",
 });

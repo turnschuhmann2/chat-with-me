@@ -76,6 +76,10 @@
   }
 }
 
+.shadow-3xl {
+  @apply shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px];
+}
+
 .gradient-background {
   @apply bg-gradient-to-br from-[#ADFFE7] to-[#01C567];
 }
