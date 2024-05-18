@@ -14,12 +14,12 @@ const menuItems = [
   {
     label: "Chat",
     icon: <ChatCircleDots />,
-    path: "/chat",
+    route: "/chat",
   },
   {
     label: "Manage Chatbots",
     icon: <Robot />,
-    path: "/chatbots",
+    route: "/chatbots/all",
   },
 ];
 
@@ -32,10 +32,12 @@ export default function MenuItems() {
         <Link
           key={index}
           className={clsx(
-            "flex flex-col items-center rounded-xl p-4 duration-100 hover:bg-lightTransparent15",
-            pathname === item.path && "bg-lightTransparent15",
+            "flex cursor-default flex-col items-center rounded-xl p-4  duration-200",
+            pathname === item.route
+              ? "bg-lightTransparent15"
+              : "hover:bg-lightTransparent10",
           )}
-          href={item.path}
+          href={item.route}
         >
           {cloneElement(item.icon, {
             size: 28,

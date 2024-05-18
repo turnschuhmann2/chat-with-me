@@ -7,6 +7,7 @@ export const theme = {
     secondaryContent: "rgba(248, 248, 248, 1)",
 
     tertiary: "rgba(106, 160, 139, 1)",
+    tertiary50: "rgba(106, 160, 139, 0.5)",
     tertiaryContent: "rgba(255, 255, 255, 1)",
 
     default: "rgba(214, 220, 218, 1)",
