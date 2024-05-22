@@ -1,51 +1,28 @@
-import { chatbotTabs } from "@/components/chatbots/tabs";
-import ChatbotCard, { type Chatbot } from "@/components/chatbots/chatbot-card";
+import { currentUser } from "@clerk/nextjs/server";
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 
-const chatbots: Chatbot[] = [
-  {
-    name: "Funny Bob",
-    description:
-      "Responds to every prompt with some funny story or joke. Good if you’re in need for a laugh!",
-    favored: true,
-    public: false,
-    creatorUserId: "user_2gb6QH8BcLiZUlmq2orzZBPPWxh",
-    avatarId: 5,
-  },
-  {
-    name: "Thinker",
-    description:
-      "A very philosophical chatbot. Has always some interesting thoughts to share and open for discussion at all times!",
-    favored: true,
-    public: true,
-    creatorUserId: "2",
-    avatarId: 7,
-  },
-  {
-    name: "Ms Coolio",
-    description:
-      "Always thinks they’re the coolest person (or robot) in the world. Chatting with this chatbot is like hanging out with the effortlessly cool kid on the block.",
-    favored: false,
-    public: true,
-    creatorUserId: "user_2gb6QH8BcLiZUlmq2orzZBPPWxh",
-    avatarId: 4,
-  },
-];
+import { chatbotRoutes } from "@/components/chatbots/tabs";
+import ChatbotCard from "@/components/chatbots/chatbot-card";
 
-export default function ChatbotsTabContentPage({
+import { chatbotFilters, getChatbots } from "@/server/db/queries";
+
+const chatbotQueries = {
+  [chatbotRoutes.all]: () => getChatbots(),
+  [chatbotRoutes.myCreations]: (userId: string) =>
+    getChatbots(chatbotFilters.createdByUser(userId)),
+  [chatbotRoutes.fromFriends]: (userId: string) =>
+    getChatbots(chatbotFilters.notCreatedByUser(userId)),
+  [chatbotRoutes.public]: () => getChatbots(chatbotFilters.isPublic),
+};
+
+export default async function ChatbotsTabContentPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const chatbotTab = chatbotTabs[params.slug];
+  const currentUserData = await currentUser();
 
-  // const tripleChatbots = [
-  //   ...chatbots,
-  //   ...chatbots,
-  //   ...chatbots,
-  //   ...chatbots,
-  //   ...chatbots,
-  // ];
+  const chatbots = await chatbotQueries[params.slug]!(currentUserData!.id);
 
   return (
     <div className="relative h-full overflow-y-auto">

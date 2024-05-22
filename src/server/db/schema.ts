@@ -34,7 +34,7 @@ export const promptRelations = relations(prompts, ({ many, one }) => ({
 
 export type Prompt = typeof prompts.$inferSelect & {
   responses: Response[];
-  chatbot: Chatbot;
+  // chatbot: Chatbot;
 };
 
 export const responses = createTable("responses", {
@@ -73,7 +73,7 @@ export type Avatar = typeof avatars.$inferSelect;
 export const chatbots = createTable("chatbots", {
   id: serial("id").primaryKey(),
   avatarId: integer("avatar_id"),
-  creatorUserId: integer("creator_user_id"),
+  creatorUserId: text("creator_user_id"),
   name: text("name").notNull(),
   description: text("description"),
   favored: boolean("favored").default(false),
@@ -95,8 +95,8 @@ export const chatbotRelations = relations(chatbots, ({ one, many }) => ({
 }));
 
 export type Chatbot = typeof chatbots.$inferSelect & {
-  avatar: Avatar;
-  prompts: Prompt[];
+  avatar: Avatar | null;
+  // prompts: Prompt[];
 };
 
 // export const chatbotsToUsers = createTable("chatbots_to_users", {

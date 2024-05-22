@@ -1,3 +1,8 @@
+import Image from "next/image";
+
+import { currentUser } from "@clerk/nextjs/server";
+import clsx from "clsx";
+
 import {
   Globe,
   PaintBrushHousehold,
@@ -8,22 +13,9 @@ import {
   DotsThreeOutlineVertical,
 } from "@phosphor-icons/react/dist/ssr";
 
-import { getSingleAvatar } from "@/server/db/queries";
-import { currentUser } from "@clerk/nextjs/server";
-import Image from "next/image";
-import clsx from "clsx";
-
-export interface Chatbot {
-  name: string;
-  description: string;
-  favored: boolean;
-  public: boolean;
-  creatorUserId: string;
-  avatarId: number;
-}
+import type { Chatbot } from "@/server/db/schema";
 
 export default async function ChatbotCard({ chatbot }: { chatbot: Chatbot }) {
-  const responseAvatar = await getSingleAvatar(chatbot.avatarId);
   const currentUserData = await currentUser();
 
   const isMyChatbot = chatbot.creatorUserId === currentUserData?.id;
@@ -31,7 +23,7 @@ export default async function ChatbotCard({ chatbot }: { chatbot: Chatbot }) {
   return (
     <div
       className="flex w-full max-w-[256px] flex-col rounded-xl p-4 duration-200 hover:shadow-lg"
-      style={{ backgroundColor: responseAvatar?.backgroundTransparent ?? "" }}
+      style={{ backgroundColor: chatbot.avatar?.backgroundTransparent ?? "" }}
     >
       <div className="flex flex-row items-center justify-between [&_svg]:size-6">
         <div>
@@ -52,10 +44,10 @@ export default async function ChatbotCard({ chatbot }: { chatbot: Chatbot }) {
       <div className="flex flex-row justify-center">
         <div
           className="flex size-[74px] flex-row items-center justify-center rounded-full"
-          style={{ backgroundColor: responseAvatar?.backgroundColor ?? "" }}
+          style={{ backgroundColor: chatbot.avatar?.backgroundColor ?? "" }}
         >
           <Image
-            src={responseAvatar?.fileUrl ?? ""}
+            src={chatbot.avatar?.fileUrl ?? ""}
             width={70}
             height={70}
             alt="Chatbot avatar"

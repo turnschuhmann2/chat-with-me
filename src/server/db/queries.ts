@@ -1,7 +1,8 @@
 import "server-only";
 
 import { db } from "@/server/db";
-import { prompts, avatars } from "@/server/db/schema";
+import { prompts, avatars, type Chatbot, chatbots } from "@/server/db/schema";
+import { type SQL, eq, ne } from "drizzle-orm";
 
 export async function getSinglePrompt(promptId: number) {
   const prompt = await db.query.prompts.findFirst({
@@ -52,4 +53,22 @@ export async function getSingleAvatar(avatarId: number) {
   // }
 
   return avatar;
+}
+
+export const chatbotFilters = {
+  none: undefined,
+  createdByUser: (userId: string) => eq(chatbots.creatorUserId, userId),
+  notCreatedByUser: (userId: string) => ne(chatbots.creatorUserId, userId),
+  isPublic: eq(chatbots.public, true),
+};
+
+export async function getChatbots(filter?: SQL<unknown>): Promise<Chatbot[]> {
+  const chatbotData = await db.query.chatbots.findMany({
+    where: filter,
+    with: {
+      avatar: true,
+    },
+  });
+
+  return chatbotData;
 }
