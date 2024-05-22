@@ -6,8 +6,8 @@ import {
   timestamp,
   text,
   integer,
-  boolean,
   primaryKey,
+  boolean,
 } from "drizzle-orm/pg-core";
 
 // Use the same database instance for multiple projects.
@@ -91,7 +91,7 @@ export const chatbotRelations = relations(chatbots, ({ one, many }) => ({
     references: [avatars.id],
   }),
   prompts: many(prompts),
-  // chatbotsToUsers: many(chatbotsToUsers),
+  chatbotsToUsers: many(usersToChatbots),
 }));
 
 export type Chatbot = typeof chatbots.$inferSelect & {
@@ -99,36 +99,24 @@ export type Chatbot = typeof chatbots.$inferSelect & {
   // prompts: Prompt[];
 };
 
-// export const chatbotsToUsers = createTable("chatbots_to_users", {
-//   id: serial("id").primaryKey(),
-//   chatbotId: integer("chatbot_id").notNull(),
-//   clerkUserId: text("clerk_user_id").notNull(),
-//   relationType: text("relation_type").notNull(),
-// });
+export const usersToChatbots = createTable(
+  "users_to_chatbots",
+  {
+    chatbotId: integer("chatbot_id").notNull(),
+    clerkUserId: text("clerk_user_id").notNull(),
+    // relationType: text("relation_type").notNull(),
+  },
+  table => ({
+    pk: primaryKey({ columns: [table.chatbotId, table.clerkUserId] }),
+  }),
+);
 
-// export const chatbotsToUsersRelations = relations(
-//   chatbotsToUsers,
-//   ({ one }) => ({
-//     chatbot: one(chatbots, {
-//       fields: [chatbotsToUsers.chatbotId],
-//       references: [chatbots.id],
-//     }),
-//   }),
-// );
-
-// export const users = createTable("users", {
-//   id: serial("id").primaryKey(),
-//   clerkUserId: text("clerk_user_id"),
-//   createdAt: timestamp("created_at")
-//     .default(sql`CURRENT_TIMESTAMP`)
-//     .notNull(),
-//   updatedAt: timestamp("updatedAt"),
-// });
-
-// export const usersRelations = relations(users, ({ many }) => ({
-//   chatbotsToUsers: many(chatbotsToUsers),
-// }));
-
-// export type User = typeof users.$inferSelect & {
-//   chatbots: Chatbot[];
-// };
+export const usersToChatbotsRelations = relations(
+  usersToChatbots,
+  ({ one }) => ({
+    chatbot: one(chatbots, {
+      fields: [usersToChatbots.chatbotId],
+      references: [chatbots.id],
+    }),
+  }),
+);

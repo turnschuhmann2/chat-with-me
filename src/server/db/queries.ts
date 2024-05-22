@@ -1,8 +1,10 @@
 import "server-only";
 
 import { db } from "@/server/db";
-import { prompts, avatars, type Chatbot, chatbots } from "@/server/db/schema";
-import { type SQL, eq, ne } from "drizzle-orm";
+import { prompts, avatars } from "@/server/db/schema";
+
+import { chatbots, usersToChatbots } from "@/server/db/schema";
+import { type SQL, eq, ne, and, inArray } from "drizzle-orm";
 
 export async function getSinglePrompt(promptId: number) {
   const prompt = await db.query.prompts.findFirst({
@@ -62,13 +64,22 @@ export const chatbotFilters = {
   isPublic: eq(chatbots.public, true),
 };
 
-export async function getChatbots(filter?: SQL<unknown>): Promise<Chatbot[]> {
-  const chatbotData = await db.query.chatbots.findMany({
-    where: filter,
-    with: {
-      avatar: true,
-    },
-  });
+export const getChatbots =
+  (clerkUserId: string, filter?: SQL<unknown>) => async () => {
+    const userChatbotRelations = await db.query.usersToChatbots.findMany({
+      where: eq(usersToChatbots.clerkUserId, clerkUserId),
+    });
 
-  return chatbotData;
-}
+    const chatbotIds = userChatbotRelations.map(
+      userToChatbot => userToChatbot.chatbotId,
+    );
+
+    const chatbotData = await db.query.chatbots.findMany({
+      where: and(inArray(chatbots.id, chatbotIds), filter),
+      with: {
+        avatar: true,
+      },
+    });
+
+    return chatbotData;
+  };

@@ -34,6 +34,7 @@ Searching for a creative and unique idea for my portfolio, I came up with this! 
 - [x] implement chatbot overview page skeleton
 - [x] add data fetch to chatbot overview page
 - [x] add filters for each chatbot page tab
+- [x] implement fetch users chatbots only
 - [ ] add share, favour and other options functionality to chatbot card
 - [ ] implement create and edit chatbot
 - [ ] add functionality to chatbot switch (add "currentChatbot" field to clerk user metadata)

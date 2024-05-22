@@ -6,14 +6,18 @@ import ChatbotCard from "@/components/chatbots/chatbot-card";
 
 import { chatbotFilters, getChatbots } from "@/server/db/queries";
 
-const chatbotQueries = {
-  [chatbotRoutes.all]: () => getChatbots(),
-  [chatbotRoutes.myCreations]: (userId: string) =>
-    getChatbots(chatbotFilters.createdByUser(userId)),
-  [chatbotRoutes.fromFriends]: (userId: string) =>
-    getChatbots(chatbotFilters.notCreatedByUser(userId)),
-  [chatbotRoutes.public]: () => getChatbots(chatbotFilters.isPublic),
-};
+const getChatbotQuery = (userId: string) => ({
+  [chatbotRoutes.all]: getChatbots(userId),
+  [chatbotRoutes.myCreations]: getChatbots(
+    userId,
+    chatbotFilters.createdByUser(userId),
+  ),
+  [chatbotRoutes.fromFriends]: getChatbots(
+    userId,
+    chatbotFilters.notCreatedByUser(userId),
+  ),
+  [chatbotRoutes.public]: getChatbots(userId, chatbotFilters.isPublic),
+});
 
 export default async function ChatbotsTabContentPage({
   params,
@@ -22,7 +26,9 @@ export default async function ChatbotsTabContentPage({
 }) {
   const currentUserData = await currentUser();
 
-  const chatbots = await chatbotQueries[params.slug]!(currentUserData!.id);
+  const query = getChatbotQuery(currentUserData!.id)[params.slug]!;
+
+  const chatbots = await query();
 
   return (
     <div className="relative h-full overflow-y-auto">
